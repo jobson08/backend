@@ -28,7 +28,7 @@ export class UserRepository {
   }
 
   async findById(id: bigint) {
-    return await this.prisma.user.findFirst({
+    return await this.prisma.user.findFirstOrThrow({
       where: { id },
     });
   }
