@@ -23,3 +23,12 @@ model User {
   
   @@map("user")
 }
+
+model Movement {
+  id BigInt @id @default(autoincrement())
+  name String @db.Citext
+  value Decimal @db.Money
+  createdAt DateTime @default(now())
+  
+  @@map("movement")
+}
