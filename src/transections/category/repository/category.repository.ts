@@ -1,10 +1,10 @@
 import { Injectable } from '@nestjs/common';
 import { PrismaService } from 'src/prisma/prisma.service';
-import { CreateMovementDto } from '../dto/create-movement.dto';
-import { UpdateMovementDto } from '../dto/update-movement.dto';
+import { CreateCategoryDto } from '../dto/create-category.dto';
+import { UpdateCategoryDto } from '../dto/update-category.dto';
 
 @Injectable()
-export class MovementRepository {
+export class CategoryRepository {
   constructor(private readonly prisma: PrismaService) {}
 
   async paginate(
@@ -14,44 +14,41 @@ export class MovementRepository {
     order: string,
     search: string,
   ) {
-    const results = await this.prisma.movement.findMany({
+    const results = await this.prisma.category.findMany({
       skip: page * size,
       take: Number(size),
       where: { name: { contains: search, mode: 'insensitive' } },
       orderBy: { [sort]: order },
     });
-    const totalItems = await this.prisma.movement.count({
+    const totalItems = await this.prisma.category.count({
       where: { name: { contains: search, mode: 'insensitive' } },
     });
     return { results, totalItems };
   }
 
   async findById(id: bigint) {
-    return await this.prisma.movement.findFirstOrThrow({
+    return await this.prisma.category.findFirstOrThrow({
       where: { id },
     });
   }
 
-  async create(createMovementDTO: CreateMovementDto) {
-    return await this.prisma.movement.create({
+  async create(createCategoryDTO: CreateCategoryDto) {
+    return await this.prisma.category.create({
       select: { id: true },
-      data: {
-        name: createMovementDTO.name,
-        value: createMovementDTO.value,
-      },
+      data: createCategoryDTO,
     });
   }
 
-  async update(id: bigint, UpdateMovementDTO: UpdateMovementDto) {
-    return await this.prisma.movement.update({
+  async update(id: bigint, UpdateCategoryDTO: UpdateCategoryDto) {
+    return await this.prisma.category.update({
       select: { id: true },
       where: { id },
-      data: UpdateMovementDTO,
+      data: UpdateCategoryDTO,
     });
   }
 
   async remove(id: bigint) {
-    return await this.prisma.movement.delete({
+    return await this.prisma.category.delete({
       select: { id: true },
       where: { id },
     });
