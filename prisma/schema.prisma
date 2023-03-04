@@ -13,42 +13,105 @@ datasource db {
 }
 
 model User {
-  id        BigInt   @id @default(autoincrement())
-  name      String   @db.Citext
-  email     String   @unique @db.Citext
-  password  String
-  url       String?
-  status    Boolean
+  id             BigInt   @id @default(autoincrement())
+  name            String   @db.Citext
+  email           String   @unique @db.Citext
+  password        String
+  avatar          String?
+  status          Boolean //(Active, Inactive)
+  monthlySpending BigInt  //gastos mensais
+  annualSpending  BigInt  //gastos anuais
+  monthlyEarning  BigInt  //ganho mensal
+  gainAnnual      BigInt  //ganho anual
+  monthlySaving   BigInt  //poupança mensal
+  role            Int?  //(Admin, User)
+  token           String
   createdAt DateTime @default(now())
 
+  Income    Income @relation(fields: [incomeId], references: [id])
+  incomeId BigInt     @map("income_id")
+  
+  Expense    Expense @relation(fields: [expenseId], references: [id])
+  expenseId BigInt     @map("expense_id")
+  
+  Category  Category @relation(fields: [categoryId], references: [id])
+  categoryId BigInt     @map("category_id")
+ 
+  Account   Account @relation(fields: [accontId], references: [id])
+  accontId BigInt     @map("accont_id")
   @@map("user")
 }
 
-model Movement {
+model Income {
   id        BigInt   @id @default(autoincrement())
-  name      String   @db.Citext
+  title     String   @unique @db.Citext
   value     Decimal  @db.Money
-  createdAt DateTime @default(now())
+  icomeDate DateTime
+  user      User []
+  account   Account []
+  category  Category []
+  createdAt     DateTime    @default(now())
+ 
+  @@map("income")
+}
 
-  @@map("movement")
+model Expense{
+  id            BigInt   @id @default(autoincrement())
+  title         String   @unique @db.Citext
+  value         Decimal  @db.Money
+  expenseDate   DateTime
+  user          User []
+  account       Account []
+  category      Category[]
+  createdAt     DateTime    @default(now())
+ 
+  @@map("expense")
 }
 
 model Category {
   id            BigInt      @id @default(autoincrement())
-  name          String      @db.Citext
+  name          String     @unique @db.Citext
+  type          BigInt  //(Income, Expense )
+  user          User []
   createdAt     DateTime    @default(now())
-  subCategory   SubCategory []
+ 
+  Income   Income @relation(fields: [incomeId], references: [id])
+  incomeId BigInt     @map("income_id")
+
+  Expense    Expense @relation(fields: [expenseId], references: [id])
+  expenseId BigInt     @map("expense_id")
 
   @@map("category")
 }
 
-model SubCategory {
+model Account {
   id         BigInt     @id @default(autoincrement())
-  name       String     @db.Citext
-  descripton String?
-  createdAt  DateTime   @default(now())
-  Category   Category @relation(fields: [categoryId], references: [id])
-  categoryId BigInt     @map("category_id")
+  name       String    @unique @db.Citext
+  balance    Decimal  @db.Money
+  type       String
+  status     Boolean
+  user       User []
+  createdAt  DateTime    @default(now())
 
-  @@map("subCategory")
+  Income   Income @relation(fields: [incomeId], references: [id])
+  incomeId BigInt     @map("income_id")
+
+  Expense    Expense @relation(fields: [expenseId], references: [id])
+  expenseId BigInt     @map("expense_id")
+   @@map("acconunt")
 }
+
+ //model SubCategory {
+ // id         BigInt     @id @default(autoincrement())
+ // name       String    @unique @db.Citext
+ // descripton String?
+ // createdAt  DateTime   @default(now())
+ // Category   Category @relation(fields: [categoryId], references: [id])
+ // categoryId BigInt     @map("category_id")
+
+ // @@map("subCategory")
+//}
+
+
+//npx prisma generate
+//npx prisma migrate dev --name init

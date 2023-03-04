@@ -12,7 +12,8 @@ export class CreateSubCategoryDto {
  @IsString({ message: 'O descriçao não pode ser vazio.' })
  descripton : string;
 
- @IsNumber({}, { message: 'A unidade deve ser um número.' })
+ @IsNotEmpty({ message: 'A categoria não pode ser vazio.' })
+ @IsNumber({}, { message: 'A categoria não pode ser vazio.', each:true })
  @Type(() => Number)
  categoryId: number;
 
