@@ -17,14 +17,13 @@ model User {
   name            String   @db.Citext
   email           String   @unique @db.Citext
   password        String
-  avatar          String?
+  avata           String?
   status          Boolean //(Active, Inactive)
   monthlySpending BigInt  //gastos mensais
   annualSpending  BigInt  //gastos anuais
   monthlyEarning  BigInt  //ganho mensal
   gainAnnual      BigInt  //ganho anual
   monthlySaving   BigInt  //poupança mensal
-  role            Int?  //(Admin, User)
   token           String
   createdAt DateTime @default(now())
 
@@ -71,7 +70,7 @@ model Expense{
 model Category {
   id            BigInt      @id @default(autoincrement())
   name          String     @unique @db.Citext
-  type          BigInt  //(Income, Expense )
+  typeService          BigInt  //(Income, Expense )
   user          User []
   createdAt     DateTime    @default(now())
  
@@ -85,13 +84,13 @@ model Category {
 }
 
 model Account {
-  id         BigInt     @id @default(autoincrement())
-  name       String    @unique @db.Citext
-  balance    Decimal  @db.Money
-  type       String
-  status     Boolean
-  user       User []
-  createdAt  DateTime    @default(now())
+  id             BigInt     @id @default(autoincrement())
+  name           String    @unique @db.Citext
+  balance        Decimal?  @db.Money
+  typeAccount    BigInt //(card, credi, Cash )
+  status         Boolean
+  user           User []
+  createdAt     DateTime    @default(now())
 
   Income   Income @relation(fields: [incomeId], references: [id])
   incomeId BigInt     @map("income_id")
@@ -100,18 +99,6 @@ model Account {
   expenseId BigInt     @map("expense_id")
    @@map("acconunt")
 }
-
- //model SubCategory {
- // id         BigInt     @id @default(autoincrement())
- // name       String    @unique @db.Citext
- // descripton String?
- // createdAt  DateTime   @default(now())
- // Category   Category @relation(fields: [categoryId], references: [id])
- // categoryId BigInt     @map("category_id")
-
- // @@map("subCategory")
-//}
-
 
 //npx prisma generate
 //npx prisma migrate dev --name init

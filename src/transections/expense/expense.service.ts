@@ -1,11 +1,12 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import { Injectable } from '@nestjs/common';
-import { CreateUserDto } from './dto/create-user.dto';
-import { UpdateUserDto } from './dto/update-user.dto';
-import { UserRepository } from './repository/user.repository';
+import { CreateExpenseDto } from 'src/transections/expense/dto/create-expense.dto';
+import { UpdateExpenseDto } from 'src/transections/expense/dto/update-expense.dto';
+import { ExpenseRepository } from 'src/transections/expense/repository/expense.repository';
 
 @Injectable()
-export class UserService {
-  constructor(private readonly repository: UserRepository) {}
+export class expenseService {
+  constructor(private readonly repository: ExpenseRepository) {}
 
   async paginate(
     page: number,
@@ -41,11 +42,14 @@ export class UserService {
     return await this.repository.findById(id);
   }
 
-  /*async create(createUserDTO: CreateUserDto) {
-    return await this.repository.create(createUserDTO);
+  /*async create(createExpenseDTO: CreateExpenseDto) {
+    return await this.repository.create(createExpenseDTO);
   }*/
+  async update(id: bigint, UpdateMovementDTO: UpdateExpenseDto) {
+    return await this.repository.update(id, UpdateMovementDTO);
+  }
 
-  async update(id: bigint, UpdateUserDTO: UpdateUserDto) {
-    return await this.repository.update(id, UpdateUserDTO);
+  async remove(id: bigint) {
+    return await this.repository.remove(id);
   }
 }

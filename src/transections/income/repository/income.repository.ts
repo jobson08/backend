@@ -1,10 +1,10 @@
 import { Injectable } from '@nestjs/common';
 import { PrismaService } from 'src/prisma/prisma.service';
-import { CreateMovementDto } from '../dto/create-movement.dto';
-import { UpdateMovementDto } from '../dto/update-movement.dto';
+import { CreateIncomeDto } from 'src/transections/income/dto/create-Income.dto';
+import { UpdateIncomeDto } from 'src/transections/income/dto/update-Income.dto';
 
 @Injectable()
-export class MovementRepository {
+export class IncomeRepository {
   constructor(private readonly prisma: PrismaService) {}
 
   async paginate(
@@ -14,39 +14,40 @@ export class MovementRepository {
     order: string,
     search: string,
   ) {
-    const results = await this.prisma.movement.findMany({
+    const results = await this.prisma.income.findMany({
       skip: page * size,
       take: Number(size),
-      where: { name: { contains: search, mode: 'insensitive' } },
+      where: { title: { contains: search, mode: 'insensitive' } },
       orderBy: { [sort]: order },
     });
-    const totalItems = await this.prisma.movement.count({
-      where: { name: { contains: search, mode: 'insensitive' } },
+    const totalItems = await this.prisma.income.count({
+      where: { title: { contains: search, mode: 'insensitive' } },
     });
     return { results, totalItems };
   }
 
   async findById(id: bigint) {
-    return await this.prisma.movement.findFirstOrThrow({
+    return await this.prisma.income.findFirstOrThrow({
       where: { id },
     });
   }
 
-  async create(createMovementDTO: CreateMovementDto) {
-    return await this.prisma.movement.create({
+  async create(createIncomeDTO: CreateIncomeDto) {
+    return await this.prisma.income.create({
       select: { id: true },
       data: {
-        name: createMovementDTO.name,
-        value: createMovementDTO.value,
+        title: createIncomeDTO.title,
+        value: createIncomeDTO.value,
+        icomeDate: createIncomeDTO.icomeDate,
       },
     });
   }
 
-  async update(id: bigint, UpdateMovementDTO: UpdateMovementDto) {
+  async update(id: bigint, UpdateIncomeDTO: UpdateIncomeDto) {
     return await this.prisma.movement.update({
       select: { id: true },
       where: { id },
-      data: UpdateMovementDTO,
+      data: UpdateIncomeDTO,
     });
   }
 

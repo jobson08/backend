@@ -1,11 +1,11 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import { Injectable } from '@nestjs/common';
-import { CreateMovementDto } from './dto/create-movement.dto';
-import { UpdateMovementDto } from './dto/update-movement.dto';
-import { MovementRepository } from './repository/movement.repository';
-
+import { CreateIncomeDto } from 'src/transections/income/dto/create-Income.dto';
+import { UpdateIncomeDto } from 'src/transections/income/dto/update-Income.dto';
+import { IncomeRepository } from 'src/transections/income/repository/income.repository';
 @Injectable()
-export class MovementService {
-  constructor(private readonly repository: MovementRepository) {}
+export class incomeService {
+  constructor(private readonly repository: IncomeRepository) {}
 
   async paginate(
     page: number,
@@ -41,11 +41,10 @@ export class MovementService {
     return await this.repository.findById(id);
   }
 
-  async create(createMovementDTO: CreateMovementDto) {
-    return await this.repository.create(createMovementDTO);
+  async create(createIncomeDTO: CreateIncomeDto) {
+    return await this.repository.create(createIncomeDTO);
   }
-
-  async update(id: bigint, UpdateMovementDTO: UpdateMovementDto) {
+  async update(id: bigint, UpdateMovementDTO: UpdateIncomeDto) {
     return await this.repository.update(id, UpdateMovementDTO);
   }
 

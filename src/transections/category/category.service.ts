@@ -41,13 +41,13 @@ export class CategoryService {
     return await this.repository.findById(id);
   }
 
-  async create(createCategoryDTO: CreateCategoryDto) {
+  /*async create(createCategoryDTO: CreateCategoryDto) {
     return await this.repository.create(createCategoryDTO);
   }
 
   async update(id: bigint, UpdateCategoryDTO: UpdateCategoryDto) {
     return await this.repository.update(id, UpdateCategoryDTO);
-  }
+  }*/
 
   async remove(id: bigint) {
     return await this.repository.remove(id);

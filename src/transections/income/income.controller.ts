@@ -8,16 +8,16 @@ import {
   Post,
   Request,
 } from '@nestjs/common';
-import { CreateMovementDto } from './dto/create-movement.dto';
-import { UpdateMovementDto } from './dto/update-movement.dto';
-import { MovementService } from './movement.service';
+import { incomeService } from 'src/transections/income/Income.service';
+import { CreateIncomeDto } from 'src/transections/income/dto/create-Income.dto';
+import { UpdateIncomeDto } from 'src/transections/income/dto/update-Income.dto';
 
 @Controller('movement')
-export class MovementController {
-  constructor(private readonly movimentService: MovementService) {}
+export class IncomeController {
+  constructor(private readonly incomeService: incomeService) {}
   @Get('pages?')
   async pagination(@Request() request) {
-    return await this.movimentService.paginate(
+    return await this.incomeService.paginate(
       request.query.hasOwnProperty('page') ? request.query.page : 0,
       request.query.hasOwnProperty('size') ? request.query.size : 10,
       request.query.hasOwnProperty('sort') ? request.query.sort : 'name',
@@ -28,24 +28,24 @@ export class MovementController {
 
   @Get(':id')
   async findById(@Param('id') id: string) {
-    return await this.movimentService.findById(BigInt(id));
+    return await this.incomeService.findById(BigInt(id));
   }
 
   @Post()
-  async create(@Body() createMovementDTO: CreateMovementDto) {
-    return await this.movimentService.create(createMovementDTO);
+  async create(@Body() createIncometDTO: CreateIncomeDto) {
+    return await this.incomeService.create(createIncometDTO);
   }
 
   @Patch(':id')
   async update(
     @Param('id') id: string,
-    @Body() updateMovementDto: UpdateMovementDto,
+    @Body() updateIncometDto: UpdateIncomeDto,
   ) {
-    return await this.movimentService.update(BigInt(id), updateMovementDto);
+    return await this.incomeService.update(BigInt(id), updateIncometDto);
   }
 
   @Delete(':id')
   async remove(@Param('id') id: string) {
-    return await this.movimentService.remove(BigInt(id));
+    return await this.incomeService.remove(BigInt(id));
   }
 }

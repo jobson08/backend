@@ -31,7 +31,7 @@ export class CategoryController {
     return await this.categoryService.findById(BigInt(id));
   }
 
-  @Post()
+  /* @Post()
   async create(@Body() createCategoryDTO: CreateCategoryDto) {
     return await this.categoryService.create(createCategoryDTO);
   }
@@ -42,7 +42,7 @@ export class CategoryController {
     @Body() updateCategoryDto: UpdateCategoryDto,
   ) {
     return await this.categoryService.update(BigInt(id), updateCategoryDto);
-  }
+  }*/
 
   @Delete(':id')
   async remove(@Param('id') id: string) {

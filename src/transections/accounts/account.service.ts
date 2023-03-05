@@ -1,11 +1,12 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import { Injectable } from '@nestjs/common';
-import { CreateSubCategoryDto } from './dto/create-subCategory.dto';
-import { UpdateSubCategoryDto } from './dto/update-subCategory.dto';
-import { SubCategoryRepository } from './repository/subCategory.repository';
+import { CreateAccountDto } from 'src/transections/accounts/dto/create-account.dto';
+import { UpdateAccountDto } from 'src/transections/accounts/dto/update-account.dto';
+import { AccountRepository } from 'src/transections/accounts/repository/account.repository';
 
 @Injectable()
-export class SubCategoryService {
-  constructor(private readonly repository: SubCategoryRepository) {}
+export class accountService {
+  constructor(private readonly repository: AccountRepository) {}
 
   async paginate(
     page: number,
@@ -41,12 +42,11 @@ export class SubCategoryService {
     return await this.repository.findById(id);
   }
 
-  async create(createCategoryDTO: CreateSubCategoryDto) {
-    return await this.repository.create(createCategoryDTO);
-  }
-
-  async update(id: bigint, UpdateSubCategoryDTO: UpdateSubCategoryDto) {
-    return await this.repository.update(id, UpdateSubCategoryDTO);
+  /* async create(createAccountDTO: CreateAccountDto) {
+    return await this.repository.create(createAccountDTO);
+  }*/
+  async update(id: bigint, UpdateMovementDTO: UpdateAccountDto) {
+    return await this.repository.update(id, UpdateMovementDTO);
   }
 
   async remove(id: bigint) {
