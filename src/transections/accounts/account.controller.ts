@@ -13,7 +13,7 @@ import { accountService } from 'src/transections/accounts/account.service';
 import { CreateAccountDto } from 'src/transections/accounts/dto/create-account.dto';
 import { UpdateAccountDto } from 'src/transections/accounts/dto/update-account.dto';
 
-@Controller('movement')
+@Controller('account')
 export class AccountController {
   constructor(private readonly accountService: accountService) {}
   @Get('pages?')
@@ -32,10 +32,10 @@ export class AccountController {
     return await this.accountService.findById(BigInt(id));
   }
 
-  /*@Post()
+  @Post()
   async create(@Body() createAccounttDTO: CreateAccountDto) {
     return await this.accountService.create(createAccounttDTO);
-  }*/
+  }
 
   @Patch(':id')
   async update(

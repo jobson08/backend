@@ -41,12 +41,12 @@ export class incomeService {
     return await this.repository.findById(id);
   }
 
-  async create(createIncomeDTO: CreateIncomeDto) {
+  /* async create(createIncomeDTO: CreateIncomeDto) {
     return await this.repository.create(createIncomeDTO);
   }
   async update(id: bigint, UpdateMovementDTO: UpdateIncomeDto) {
     return await this.repository.update(id, UpdateMovementDTO);
-  }
+  }*/
 
   async remove(id: bigint) {
     return await this.repository.remove(id);

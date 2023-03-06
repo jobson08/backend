@@ -12,7 +12,7 @@ import { incomeService } from 'src/transections/income/Income.service';
 import { CreateIncomeDto } from 'src/transections/income/dto/create-Income.dto';
 import { UpdateIncomeDto } from 'src/transections/income/dto/update-Income.dto';
 
-@Controller('movement')
+@Controller('income')
 export class IncomeController {
   constructor(private readonly incomeService: incomeService) {}
   @Get('pages?')
@@ -31,7 +31,7 @@ export class IncomeController {
     return await this.incomeService.findById(BigInt(id));
   }
 
-  @Post()
+  /* @Post()
   async create(@Body() createIncometDTO: CreateIncomeDto) {
     return await this.incomeService.create(createIncometDTO);
   }
@@ -42,7 +42,7 @@ export class IncomeController {
     @Body() updateIncometDto: UpdateIncomeDto,
   ) {
     return await this.incomeService.update(BigInt(id), updateIncometDto);
-  }
+  }*/
 
   @Delete(':id')
   async remove(@Param('id') id: string) {

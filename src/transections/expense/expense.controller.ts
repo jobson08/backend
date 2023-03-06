@@ -13,7 +13,7 @@ import { CreateExpenseDto } from 'src/transections/expense/dto/create-expense.dt
 import { UpdateExpenseDto } from 'src/transections/expense/dto/update-expense.dto';
 import { expenseService } from 'src/transections/expense/expense.service';
 
-@Controller('movement')
+@Controller('expense')
 export class ExpenseController {
   constructor(private readonly expenseService: expenseService) {}
   @Get('pages?')

@@ -32,15 +32,17 @@ export class AccountRepository {
     });
   }
 
-  /* async create(createAccountDTO: CreateAccountDto) {
+  async create(createAccountDTO: CreateAccountDto) {
     return await this.prisma.account.create({
       select: { id: true },
       data: {
         name: createAccountDTO.name,
         typeAccount: createAccountDTO.typeAccount,
+        userId: createAccountDTO.userId,
+        status: true,
       },
     });
-  }*/
+  }
 
   async update(id: bigint, UpdateAccountDTO: UpdateAccountDto) {
     return await this.prisma.movement.update({

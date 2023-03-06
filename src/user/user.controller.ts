@@ -26,10 +26,10 @@ export class UserController {
     return await this.userService.findById(BigInt(id));
   }
 
-  /*@Post() 
+  @Post() 
   async create(@Body() createUserDTO: CreateUserDto) {
     return await this.userService.create(createUserDTO);
-  } */
+  } 
 
   @Patch(':id')
   async update(@Param('id') id: string, 

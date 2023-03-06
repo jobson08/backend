@@ -21,11 +21,6 @@ export class CreateUserDto {
   password: string;
 
   @IsOptional()
-  @IsNotEmpty({ message: 'O imagens não pode ser vazio.' })
-  @IsString({ message: 'O imagens não pode ser vazio.' })
-  avata: string;
-
-  @IsOptional()
   @IsNotEmpty({ message: 'O tpken não pode ser vazio.' })
   @IsString({ message: 'O token não pode ser vazio.' })
   token: string;

@@ -32,18 +32,13 @@ export class UserRepository {
     });
   }
 
-  /*async create(createUserDTO: CreateUserDto) {
+  async create(createUserDTO: CreateUserDto) {
+    const newUser: any = createUserDTO;
     return await this.prisma.user.create({
       select: { id: true },
-      data: {
-        name: createUserDTO.name,
-        email: createUserDTO.email,
-        password: createUserDTO.password,
-        status: true,
-      },
+      data: createUserDTO as any,
     });
-  }*/
-
+  }
   async update(id: bigint, UpdateUserDTO: UpdateUserDto) {
     return await this.prisma.user.update({
       where: { id },

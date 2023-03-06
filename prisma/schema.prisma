@@ -19,38 +19,43 @@ model User {
   password        String
   avata           String?
   status          Boolean //(Active, Inactive)
-  monthlySpending BigInt  //gastos mensais
-  annualSpending  BigInt  //gastos anuais
-  monthlyEarning  BigInt  //ganho mensal
-  gainAnnual      BigInt  //ganho anual
-  monthlySaving   BigInt  //poupança mensal
   token           String
+  monthlySpending Decimal?  @db.Money  //gastos mensais
+  annualSpending  Decimal? @db.Money //gastos anuais
+  monthlyEarning  Decimal?  @db.Money  //ganho mensal
+  gainAnnual      Decimal?  @db.Money //ganho anual
+  monthlySaving   Decimal?  @db.Money  //poupança mensal
+ 
+  income    Income[]
+
+  expense   Expense[]
+
+  account   Account []
+
+  category  Category []
+
   createdAt DateTime @default(now())
 
-  Income    Income @relation(fields: [incomeId], references: [id])
-  incomeId BigInt     @map("income_id")
-  
-  Expense    Expense @relation(fields: [expenseId], references: [id])
-  expenseId BigInt     @map("expense_id")
-  
-  Category  Category @relation(fields: [categoryId], references: [id])
-  categoryId BigInt     @map("category_id")
- 
-  Account   Account @relation(fields: [accontId], references: [id])
-  accontId BigInt     @map("accont_id")
   @@map("user")
 }
 
 model Income {
-  id        BigInt   @id @default(autoincrement())
-  title     String   @unique @db.Citext
-  value     Decimal  @db.Money
-  icomeDate DateTime
-  user      User []
-  account   Account []
-  category  Category []
+  id           BigInt   @id @default(autoincrement())
+  title         String   @unique @db.Citext
+  value         Decimal  @db.Money
+  icomeDate     DateTime
+
   createdAt     DateTime    @default(now())
+
+  category  Category @relation(fields: [categoryId], references: [id])
+  categoryId BigInt     @map("category_id")
+
+  account  Account @relation(fields: [accountId], references: [id])
+  accountId BigInt     @map("account_id")
  
+  user  User @relation(fields: [userId], references: [id])
+  userId BigInt     @map("user_id")
+
   @@map("income")
 }
 
@@ -59,26 +64,35 @@ model Expense{
   title         String   @unique @db.Citext
   value         Decimal  @db.Money
   expenseDate   DateTime
-  user          User []
-  account       Account []
-  category      Category[]
+
   createdAt     DateTime    @default(now())
+
+  category  Category @relation(fields: [categoryId], references: [id])
+  categoryId BigInt     @map("category_id")
+
+  account  Account @relation(fields: [accountId], references: [id])
+  accountId BigInt     @map("account_id")
  
+  user  User @relation(fields: [userId], references: [id])
+  userId BigInt     @map("user_id")
+
   @@map("expense")
 }
 
 model Category {
   id            BigInt      @id @default(autoincrement())
   name          String     @unique @db.Citext
-  typeService          BigInt  //(Income, Expense )
-  user          User []
-  createdAt     DateTime    @default(now())
- 
-  Income   Income @relation(fields: [incomeId], references: [id])
-  incomeId BigInt     @map("income_id")
+  typeService   BigInt  //(Income, Expense )
 
-  Expense    Expense @relation(fields: [expenseId], references: [id])
-  expenseId BigInt     @map("expense_id")
+  createdAt     DateTime    @default(now())
+  
+  income    Income[]
+
+  expense   Expense[]
+  
+  user  User @relation(fields: [userId], references: [id])
+  userId BigInt     @map("user_id")
+ 
 
   @@map("category")
 }
@@ -87,17 +101,18 @@ model Account {
   id             BigInt     @id @default(autoincrement())
   name           String    @unique @db.Citext
   balance        Decimal?  @db.Money
-  typeAccount    BigInt //(card, credi, Cash )
-  status         Boolean
-  user           User []
+  typeAccount    String //(card, credi, Cash )
+  status         Boolean  //(ativado, desativado)
   createdAt     DateTime    @default(now())
 
-  Income   Income @relation(fields: [incomeId], references: [id])
-  incomeId BigInt     @map("income_id")
+  income    Income[]
 
-  Expense    Expense @relation(fields: [expenseId], references: [id])
-  expenseId BigInt     @map("expense_id")
-   @@map("acconunt")
+  expense   Expense[]
+
+  user  User @relation(fields: [userId], references: [id])
+  userId BigInt     @map("user_id")
+
+   @@map("account")
 }
 
 //npx prisma generate

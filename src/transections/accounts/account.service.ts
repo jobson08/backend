@@ -42,9 +42,9 @@ export class accountService {
     return await this.repository.findById(id);
   }
 
-  /* async create(createAccountDTO: CreateAccountDto) {
+  async create(createAccountDTO: CreateAccountDto) {
     return await this.repository.create(createAccountDTO);
-  }*/
+  }
   async update(id: bigint, UpdateMovementDTO: UpdateAccountDto) {
     return await this.repository.update(id, UpdateMovementDTO);
   }

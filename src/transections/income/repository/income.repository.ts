@@ -32,7 +32,7 @@ export class IncomeRepository {
     });
   }
 
-  async create(createIncomeDTO: CreateIncomeDto) {
+  /* async create(createIncomeDTO: CreateIncomeDto) {
     return await this.prisma.income.create({
       select: { id: true },
       data: {
@@ -41,7 +41,7 @@ export class IncomeRepository {
         icomeDate: createIncomeDTO.icomeDate,
       },
     });
-  }
+  }*/
 
   async update(id: bigint, UpdateIncomeDTO: UpdateIncomeDto) {
     return await this.prisma.movement.update({

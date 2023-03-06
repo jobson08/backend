@@ -41,9 +41,9 @@ export class UserService {
     return await this.repository.findById(id);
   }
 
-  /*async create(createUserDTO: CreateUserDto) {
+  async create(createUserDTO: CreateUserDto) {
     return await this.repository.create(createUserDTO);
-  }*/
+  }
 
   async update(id: bigint, UpdateUserDTO: UpdateUserDto) {
     return await this.repository.update(id, UpdateUserDTO);
