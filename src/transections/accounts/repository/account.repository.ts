@@ -39,7 +39,6 @@ export class AccountRepository {
         name: createAccountDTO.name,
         typeAccount: createAccountDTO.typeAccount,
         userId: createAccountDTO.userId,
-        status: true,
       },
     });
   }

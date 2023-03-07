@@ -14,4 +14,16 @@ title: string;
 
  @IsDate({message: 'A data não pode ser vazio'})
  icomeDate: Date;
+
+ @IsNumber({}, { message: 'O usuario id não pode ser vazio.' })
+    @Type(() => Number)
+    categoryId: number;
+
+@IsNumber({}, { message: 'O usuario id não pode ser vazio.' })
+    @Type(() => Number)
+    accountId: number;
+
+ @IsNumber({}, { message: 'O usuario id não pode ser vazio.' })
+    @Type(() => Number)
+    userId: number;
 }

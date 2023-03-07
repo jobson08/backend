@@ -18,8 +18,7 @@ model User {
   email           String   @unique @db.Citext
   password        String
   avata           String?
-  status          Boolean //(Active, Inactive)
-  token           String
+  enabled         Boolean //(Active, Inactive)
   monthlySpending Decimal?  @db.Money  //gastos mensais
   annualSpending  Decimal? @db.Money //gastos anuais
   monthlyEarning  Decimal?  @db.Money  //ganho mensal
@@ -82,7 +81,7 @@ model Expense{
 model Category {
   id            BigInt      @id @default(autoincrement())
   name          String     @unique @db.Citext
-  typeService   BigInt  //(Income, Expense )
+  typeService   Int  //(Income, Expense )
 
   createdAt     DateTime    @default(now())
   
@@ -102,7 +101,6 @@ model Account {
   name           String    @unique @db.Citext
   balance        Decimal?  @db.Money
   typeAccount    String //(card, credi, Cash )
-  status         Boolean  //(ativado, desativado)
   createdAt     DateTime    @default(now())
 
   income    Income[]

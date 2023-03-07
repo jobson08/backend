@@ -1,4 +1,5 @@
 /* eslint-disable prettier/prettier */
+import { Type } from 'class-transformer';
 import {IsNotEmpty, IsNumber, IsString } from 'class-validator';
 
 export class CreateAccountDto {
@@ -11,10 +12,9 @@ export class CreateAccountDto {
     @IsString({ message: 'O nome não pode ser vazio.' })
     typeAccount: string;
 
-
-    @IsNotEmpty({ message: 'O usuario id não pode ser vazio.' })
     @IsNumber({}, { message: 'O usuario id não pode ser vazio.' })
-    userId: number
+    @Type(() => Number)
+    userId: number;
     
 }
 

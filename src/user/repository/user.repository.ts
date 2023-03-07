@@ -33,10 +33,14 @@ export class UserRepository {
   }
 
   async create(createUserDTO: CreateUserDto) {
-    const newUser: any = createUserDTO;
     return await this.prisma.user.create({
       select: { id: true },
-      data: createUserDTO as any,
+      data: {
+        name: createUserDTO.name,
+        email:createUserDTO.email,
+        password: createUserDTO.password,
+        enable: true.
+      }
     });
   }
   async update(id: bigint, UpdateUserDTO: UpdateUserDto) {

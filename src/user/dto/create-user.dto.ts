@@ -12,16 +12,11 @@ export class CreateUserDto {
   name: string;
 
   @IsNotEmpty({ message: 'O email não pode ser vazio.' })
-  @IsEmail({ message: 'O email não pode ser vazio.' })
+  @IsEmail({}, { message: 'O email não pode ser vazio.' })
   email: string;
 
   @IsNotEmpty({ message: 'O senha não pode ser vazio.' })
   @IsString({ message: 'O senha não pode ser vazio.' })
   @MinLength(8, { message: 'A senha deve ter 8 caracteres no minimo ' })
   password: string;
-
-  @IsOptional()
-  @IsNotEmpty({ message: 'O tpken não pode ser vazio.' })
-  @IsString({ message: 'O token não pode ser vazio.' })
-  token: string;
 }
