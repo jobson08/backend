@@ -1,4 +1,16 @@
-import { Controller, Delete, Get, Param, Request } from '@nestjs/common';
+/* eslint-disable @typescript-eslint/no-unused-vars */
+import {
+  Body,
+  Controller,
+  Delete,
+  Get,
+  Param,
+  Patch,
+  Post,
+  Request,
+} from '@nestjs/common';
+import { CreateSubCategoryDto } from 'src/transections/subCategory/dto/create-subCategory.dto';
+import { UpdateSubCategoryDto } from 'src/transections/subCategory/dto/update-subCategorydto';
 import { SubCategoryService } from 'src/transections/subCategory/subCategoryservice';
 
 @Controller('subcategory')
@@ -20,7 +32,7 @@ export class SubCategoryController {
     return await this.subcategoryService.findById(BigInt(id));
   }
 
-  /* @Post()
+  @Post()
   async create(@Body() createSubCategoryDTO: CreateSubCategoryDto) {
     return await this.subcategoryService.create(createSubCategoryDTO);
   }
@@ -28,10 +40,10 @@ export class SubCategoryController {
   @Patch(':id')
   async update(
     @Param('id') id: string,
-    @Body() updateSubCategoryDto: UpdateSubCategoryDto,
+    @Body() updateCategoryDto: UpdateSubCategoryDto,
   ) {
-    return await this.subcategoryService.update(BigInt(id), updateSubCategoryDto);
-  }*/
+    return await this.subcategoryService.update(BigInt(id), updateCategoryDto);
+  }
 
   @Delete(':id')
   async remove(@Param('id') id: string) {

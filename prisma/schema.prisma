@@ -33,8 +33,6 @@ model User {
 
   category  Category []
 
-  subCategory  SubCategory []
-
   createdAt DateTime @default(now())
 
   @@map("user")
@@ -108,9 +106,6 @@ model SubCategory {
   category  Category @relation(fields: [categoryId], references: [id])
   categoryId BigInt 
   
-  user  User @relation(fields: [userId], references: [id])
-  userId BigInt     @map("user_id")
- 
 
   @@map("subCategory")
 }
@@ -128,7 +123,7 @@ model Account {
   expense   Expense[]
 
   user  User @relation(fields: [userId], references: [id])
-  userId BigInt     @map("user_id")
+  userId BigInt   
 
    @@map("account")
 }

@@ -19,6 +19,7 @@ export class IncomeRepository {
       take: Number(size),
       where: { title: { contains: search, mode: 'insensitive' } },
       orderBy: { [sort]: order },
+      include: { category: { include: { subCategory: true } }, account: true },
     });
     const totalItems = await this.prisma.income.count({
       where: { title: { contains: search, mode: 'insensitive' } },

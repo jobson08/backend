@@ -1,4 +1,6 @@
 import { Injectable } from '@nestjs/common';
+import { CreateSubCategoryDto } from 'src/transections/subCategory/dto/create-subCategory.dto';
+import { UpdateSubCategoryDto } from 'src/transections/subCategory/dto/update-subCategorydto';
 import { SubCategoryRepository } from 'src/transections/subCategory/repository/subCategory.repository';
 
 @Injectable()
@@ -39,13 +41,13 @@ export class SubCategoryService {
     return await this.repository.findById(id);
   }
 
-  /*async create(createSubCategoryDTO: CreateSubCategoryDto) {
+  async create(createSubCategoryDTO: CreateSubCategoryDto) {
     return await this.repository.create(createSubCategoryDTO);
   }
 
   async update(id: bigint, UpdateSubCategoryDTO: UpdateSubCategoryDto) {
     return await this.repository.update(id, UpdateSubCategoryDTO);
-  }*/
+  }
 
   async remove(id: bigint) {
     return await this.repository.remove(id);

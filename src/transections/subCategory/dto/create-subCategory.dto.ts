@@ -6,9 +6,9 @@ export class CreateSubCategoryDto {
   @IsString({ message: 'O nome não pode ser vazio.' })
   name: string;
 
-  @IsNotEmpty({ message: 'O usuario id não pode ser vazio.' })
   @IsNumber({}, { message: 'O usuario id não pode ser vazio.' })
-  typeService: number;
+  @Type(() => Number)
+  categoryId: number;
 
   @IsNumber({}, { message: 'O usuario id não pode ser vazio.' })
   @Type(() => Number)

@@ -19,6 +19,7 @@ export class ExpenseRepository {
       take: Number(size),
       where: { title: { contains: search, mode: 'insensitive' } },
       orderBy: { [sort]: order },
+      include: { category: { include: { subCategory: true } }, account: true },
     });
     const totalItems = await this.prisma.expense.count({
       where: { title: { contains: search, mode: 'insensitive' } },
