@@ -1,11 +1,9 @@
 import { Injectable } from '@nestjs/common';
-import { CreateCategoryDto } from './dto/create-category.dto';
-import { UpdateCategoryDto } from './dto/update-category.dto';
-import { CategoryRepository } from './repository/category.repository';
+import { SubCategoryRepository } from 'src/transections/subCategory/repository/subCategory.repository';
 
 @Injectable()
-export class CategoryService {
-  constructor(private readonly repository: CategoryRepository) {}
+export class SubCategoryService {
+  constructor(private readonly repository: SubCategoryRepository) {}
 
   async paginate(
     page: number,
@@ -41,13 +39,13 @@ export class CategoryService {
     return await this.repository.findById(id);
   }
 
-  async create(createCategoryDTO: CreateCategoryDto) {
-    return await this.repository.create(createCategoryDTO);
+  /*async create(createSubCategoryDTO: CreateSubCategoryDto) {
+    return await this.repository.create(createSubCategoryDTO);
   }
 
-  async update(id: bigint, UpdateCategoryDTO: UpdateCategoryDto) {
-    return await this.repository.update(id, UpdateCategoryDTO);
-  }
+  async update(id: bigint, UpdateSubCategoryDTO: UpdateSubCategoryDto) {
+    return await this.repository.update(id, UpdateSubCategoryDTO);
+  }*/
 
   async remove(id: bigint) {
     return await this.repository.remove(id);

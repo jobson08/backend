@@ -37,10 +37,10 @@ export class UserRepository {
       select: { id: true },
       data: {
         name: createUserDTO.name,
-        email:createUserDTO.email,
+        email: createUserDTO.email,
         password: createUserDTO.password,
-        enable: true.
-      }
+        enabled: true,
+      },
     });
   }
   async update(id: bigint, UpdateUserDTO: UpdateUserDto) {

@@ -19,11 +19,11 @@ model User {
   password        String
   avata           String?
   enabled         Boolean //(Active, Inactive)
-  monthlySpending Decimal?  @db.Money  //gastos mensais
-  annualSpending  Decimal? @db.Money //gastos anuais
-  monthlyEarning  Decimal?  @db.Money  //ganho mensal
-  gainAnnual      Decimal?  @db.Money //ganho anual
-  monthlySaving   Decimal?  @db.Money  //poupança mensal
+  //monthlySpending Decimal?  @db.Money  //gastos mensais
+ // annualSpending  Decimal? @db.Money //gastos anuais
+  //monthlyEarning  Decimal?  @db.Money  //ganho mensal
+ // gainAnnual      Decimal?  @db.Money //ganho anual
+  //monthlySaving   Decimal?  @db.Money  //poupança mensal
  
   income    Income[]
 
@@ -32,6 +32,8 @@ model User {
   account   Account []
 
   category  Category []
+
+  subCategory  SubCategory []
 
   createdAt DateTime @default(now())
 
@@ -45,15 +47,16 @@ model Income {
   icomeDate     DateTime
 
   createdAt     DateTime    @default(now())
+  updatedAt     DateTime    @updatedAt
 
   category  Category @relation(fields: [categoryId], references: [id])
-  categoryId BigInt     @map("category_id")
+  categoryId BigInt  
 
   account  Account @relation(fields: [accountId], references: [id])
-  accountId BigInt     @map("account_id")
+  accountId BigInt 
  
   user  User @relation(fields: [userId], references: [id])
-  userId BigInt     @map("user_id")
+  userId BigInt 
 
   @@map("income")
 }
@@ -65,15 +68,16 @@ model Expense{
   expenseDate   DateTime
 
   createdAt     DateTime    @default(now())
+  updatedAt     DateTime    @updatedAt
 
   category  Category @relation(fields: [categoryId], references: [id])
-  categoryId BigInt     @map("category_id")
+  categoryId BigInt 
 
   account  Account @relation(fields: [accountId], references: [id])
-  accountId BigInt     @map("account_id")
+  accountId BigInt 
  
   user  User @relation(fields: [userId], references: [id])
-  userId BigInt     @map("user_id")
+  userId BigInt 
 
   @@map("expense")
 }
@@ -81,19 +85,34 @@ model Expense{
 model Category {
   id            BigInt      @id @default(autoincrement())
   name          String     @unique @db.Citext
-  typeService   Int  //(Income, Expense )
-
   createdAt     DateTime    @default(now())
   
+  subCategory   SubCategory[]
+
   income    Income[]
 
   expense   Expense[]
   
   user  User @relation(fields: [userId], references: [id])
-  userId BigInt     @map("user_id")
+  userId BigInt 
  
 
   @@map("category")
+}
+
+model SubCategory {
+  id            BigInt      @id @default(autoincrement())
+  name          String     @unique @db.Citext
+  createdAt     DateTime    @default(now())
+  
+  category  Category @relation(fields: [categoryId], references: [id])
+  categoryId BigInt 
+  
+  user  User @relation(fields: [userId], references: [id])
+  userId BigInt     @map("user_id")
+ 
+
+  @@map("subCategory")
 }
 
 model Account {
@@ -102,6 +121,7 @@ model Account {
   balance        Decimal?  @db.Money
   typeAccount    String //(card, credi, Cash )
   createdAt     DateTime    @default(now())
+  updatedAt     DateTime    @updatedAt
 
   income    Income[]
 

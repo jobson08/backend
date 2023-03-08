@@ -1,10 +1,8 @@
 import { Injectable } from '@nestjs/common';
 import { PrismaService } from 'src/prisma/prisma.service';
-import { CreateCategoryDto } from '../dto/create-category.dto';
-import { UpdateCategoryDto } from '../dto/update-category.dto';
 
 @Injectable()
-export class CategoryRepository {
+export class SubCategoryRepository {
   constructor(private readonly prisma: PrismaService) {}
 
   async paginate(
@@ -14,44 +12,43 @@ export class CategoryRepository {
     order: string,
     search: string,
   ) {
-    const results = await this.prisma.category.findMany({
+    const results = await this.prisma.subcategory.findMany({
       skip: page * size,
       take: Number(size),
       where: { name: { contains: search, mode: 'insensitive' } },
       orderBy: { [sort]: order },
     });
-    const totalItems = await this.prisma.category.count({
+    const totalItems = await this.prisma.subcategory.count({
       where: { name: { contains: search, mode: 'insensitive' } },
     });
     return { results, totalItems };
   }
 
   async findById(id: bigint) {
-    return await this.prisma.category.findFirstOrThrow({
+    return await this.prisma.subcategory.findFirstOrThrow({
       where: { id },
     });
   }
 
-  async create(createCategoryDTO: CreateCategoryDto) {
-    return await this.prisma.category.create({
+  /*async create(createSubCategoryDTO: CreateSubCategoryDto) {
+    return await this.prisma.subcategory.create({
       select: { id: true },
       data: {
-        name: createCategoryDTO.name,
-        userId: createCategoryDTO.userId,
+        name: createSubCategoryDTO.name,
       },
     });
   }
 
-  async update(id: bigint, UpdateCategoryDTO: UpdateCategoryDto) {
-    return await this.prisma.category.update({
+  async update(id: bigint, UpdateSubCategoryDTO: UpdateSubCategoryDto) {
+    return await this.prisma.subcategory.update({
       select: { id: true },
       where: { id },
-      data: UpdateCategoryDTO,
+      data: UpdateSubCategoryDTO,
     });
-  }
+  }*/
 
   async remove(id: bigint) {
-    return await this.prisma.category.delete({
+    return await this.prisma.subcategory.delete({
       select: { id: true },
       where: { id },
     });
