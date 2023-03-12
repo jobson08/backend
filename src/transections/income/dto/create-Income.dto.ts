@@ -15,6 +15,10 @@ title: string;
  @IsDate({message: 'A data não pode ser vazio'})
  icomeDate: Date;
 
+@IsNotEmpty({ message: 'O descrição não pode ser vazio.' })
+@IsString({ message: 'O descrição não pode ser vazio.' })
+description: string;
+
  @IsNumber({}, { message: 'O usuario id não pode ser vazio.' })
     @Type(() => Number)
     categoryId: number;
@@ -27,3 +31,22 @@ title: string;
     @Type(() => Number)
     userId: number;
 }
+
+/*
+id           BigInt   @id @default(autoincrement())
+  title         String   @unique @db.Citext
+  value         Decimal  @db.Money
+  icomeDate     DateTime
+
+  createdAt     DateTime    @default(now())
+  updatedAt     DateTime    @updatedAt
+
+  category  Category @relation(fields: [categoryId], references: [id])
+  categoryId BigInt  
+
+  account  Account @relation(fields: [accountId], references: [id])
+  accountId BigInt 
+ 
+  user  User @relation(fields: [userId], references: [id])
+  userId BigInt 
+*/

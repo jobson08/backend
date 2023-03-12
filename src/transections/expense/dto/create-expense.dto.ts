@@ -15,6 +15,10 @@ title: string;
  @IsDate({message: 'A data não pode ser vazio'})
  expenseDate: Date;
 
+  @IsNotEmpty({ message: 'O descrição não pode ser vazio.' })
+  @IsString({ message: 'O descrição não pode ser vazio.' })
+  description: string;
+
  @IsNumber({}, { message: 'O usuario id não pode ser vazio.' })
     @Type(() => Number)
     categoryId: number;

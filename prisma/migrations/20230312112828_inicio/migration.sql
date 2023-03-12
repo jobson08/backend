@@ -51,6 +51,7 @@ CREATE TABLE "expense" (
 CREATE TABLE "category" (
     "id" BIGSERIAL NOT NULL,
     "name" CITEXT NOT NULL,
+    "icon" INTEGER,
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "userId" BIGINT NOT NULL,
 
@@ -63,7 +64,7 @@ CREATE TABLE "subCategory" (
     "name" CITEXT NOT NULL,
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "categoryId" BIGINT NOT NULL,
-    "user_id" BIGINT NOT NULL,
+    "userId" BIGINT NOT NULL,
 
     CONSTRAINT "subCategory_pkey" PRIMARY KEY ("id")
 );
@@ -76,7 +77,7 @@ CREATE TABLE "account" (
     "typeAccount" TEXT NOT NULL,
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updatedAt" TIMESTAMP(3) NOT NULL,
-    "user_id" BIGINT NOT NULL,
+    "userId" BIGINT NOT NULL,
 
     CONSTRAINT "account_pkey" PRIMARY KEY ("id")
 );
@@ -124,7 +125,7 @@ ALTER TABLE "category" ADD CONSTRAINT "category_userId_fkey" FOREIGN KEY ("userI
 ALTER TABLE "subCategory" ADD CONSTRAINT "subCategory_categoryId_fkey" FOREIGN KEY ("categoryId") REFERENCES "category"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
-ALTER TABLE "subCategory" ADD CONSTRAINT "subCategory_user_id_fkey" FOREIGN KEY ("user_id") REFERENCES "user"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+ALTER TABLE "subCategory" ADD CONSTRAINT "subCategory_userId_fkey" FOREIGN KEY ("userId") REFERENCES "user"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
-ALTER TABLE "account" ADD CONSTRAINT "account_user_id_fkey" FOREIGN KEY ("user_id") REFERENCES "user"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+ALTER TABLE "account" ADD CONSTRAINT "account_userId_fkey" FOREIGN KEY ("userId") REFERENCES "user"("id") ON DELETE RESTRICT ON UPDATE CASCADE;

@@ -19,7 +19,7 @@ export class ExpenseRepository {
       take: Number(size),
       where: { title: { contains: search, mode: 'insensitive' } },
       orderBy: { [sort]: order },
-      include: { category: { include: { subCategory: true } }, account: true },
+      // include: { category: { include: { subCategory: true } }, account: true },
     });
     const totalItems = await this.prisma.expense.count({
       where: { title: { contains: search, mode: 'insensitive' } },
@@ -39,7 +39,11 @@ export class ExpenseRepository {
       data: {
         title: createExpenseDTO.title,
         value: createExpenseDTO.value,
-        expenseDate: createExpenseDTO.expenseDate,
+        icomeDate: createExpenseDTO.icomeDate,
+        desciption: createExpenseDTO.description,
+        categoryId: createExpenseDTO.categoryId, //na catgoria adicionar a subCategoria
+        accountId: createExpenseDTO.accountId, //na conta adiciona o value do (icome) no (balance) da conta
+        userId: createExpenseDTO.userId,
       },
     });
   }*/

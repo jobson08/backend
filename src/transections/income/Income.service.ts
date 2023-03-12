@@ -4,7 +4,7 @@ import { CreateIncomeDto } from 'src/transections/income/dto/create-Income.dto';
 import { UpdateIncomeDto } from 'src/transections/income/dto/update-Income.dto';
 import { IncomeRepository } from 'src/transections/income/repository/income.repository';
 @Injectable()
-export class incomeService {
+export class IncomeService {
   constructor(private readonly repository: IncomeRepository) {}
 
   async paginate(
@@ -41,12 +41,12 @@ export class incomeService {
     return await this.repository.findById(id);
   }
 
-  /* async create(createIncomeDTO: CreateIncomeDto) {
+  async create(createIncomeDTO: CreateIncomeDto) {
     return await this.repository.create(createIncomeDTO);
   }
   async update(id: bigint, UpdateMovementDTO: UpdateIncomeDto) {
     return await this.repository.update(id, UpdateMovementDTO);
-  }*/
+  }
 
   async remove(id: bigint) {
     return await this.repository.remove(id);

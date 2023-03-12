@@ -1,5 +1,4 @@
-/*import { PrismaClient } from '@prisma/client';
-//import * as bcrypt from 'bcrypt';
+import { PrismaClient } from '@prisma/client';
 const prisma = new PrismaClient();
 async function main() {
   //user
@@ -23,35 +22,53 @@ async function main() {
   });
   //category
   await prisma.category.create({
-    data: { name: 'fabrica de bolos', userId: 1 },
+    data: { name: 'fabrica de bolos', icon: 1, userId: 1 },
   });
   await prisma.category.create({
-    data: { name: 'Padaria', userId: 1 },
+    data: { name: 'Padaria', icon: 2, userId: 1 },
   });
   await prisma.category.create({
-    data: { name: 'Casa', userId: 1 },
+    data: { name: 'Casa', icon: 3, userId: 1 },
   });
   await prisma.category.create({
-    data: { name: 'Gasto Pessoal', userId: 1 },
+    data: { name: 'Gasto Pessoal', icon: 4, userId: 1 },
   });
   await prisma.category.create({
-    data: { name: 'Gasto Esporádicos', userId: 1 },
+    data: { name: 'Gasto Esporádicos', icon: 5, userId: 1 },
   });
   await prisma.category.create({
-    data: { name: 'Imposto', userId: 1 },
+    data: { name: 'Imposto', icon: 6, userId: 1 },
   });
   await prisma.category.create({
-    data: { name: 'Saude', userId: 1 },
+    data: { name: 'Saude', icon: 7, userId: 1 },
   });
   await prisma.category.create({
-    data: { name: 'Transporte', userId: 1 },
+    data: { name: 'Transporte', icon: 8, userId: 1 },
   });
   await prisma.category.create({
-    data: { name: 'Serviços Financeiros', userId: 1 },
+    data: { name: 'Serviços Financeiros', icon: 9, userId: 1 },
   });
 
-  
+  //SubCategory
+  await prisma.subCategory.create({
+    data: { name: 'Sony Pão', categoryId: 2, userId: 1 },
+  });
+  await prisma.subCategory.create({
+    data: { name: 'Sony', categoryId: 1, userId: 1 },
+  });
+  await prisma.subCategory.create({
+    data: { name: 'Carlos Merces', categoryId: 1, userId: 1 },
+  });
+  await prisma.subCategory.create({
+    data: { name: 'Luiz Garapu', categoryId: 1, userId: 1 },
+  });
+  await prisma.subCategory.create({
+    data: { name: 'Produção Despesa', categoryId: 1, userId: 1 },
+  });
 
+  //npx prisma migrate reset
+  //npx prisma db seed
+}
 main()
   .then(async () => {
     await prisma.$disconnect();
@@ -60,4 +77,4 @@ main()
     console.error(e);
     await prisma.$disconnect();
     process.exit(1);
-  });*/
+  });
