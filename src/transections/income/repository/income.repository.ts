@@ -19,7 +19,7 @@ export class IncomeRepository {
       take: Number(size),
       where: { title: { contains: search, mode: 'insensitive' } },
       orderBy: { [sort]: order },
-      //include: { subCategory: { include: { category: true } }, account: true },
+      include: { category: true, subCategory: true, account: true },
     });
     const totalItems = await this.prisma.income.count({
       where: { title: { contains: search, mode: 'insensitive' } },
@@ -34,6 +34,7 @@ export class IncomeRepository {
   }
 
   async create(createIncomeDTO: CreateIncomeDto) {
+    //const parsedDate: Date = new Date(icomeDate);
     return await this.prisma.income.create({
       select: { id: true },
       data: {
@@ -41,9 +42,9 @@ export class IncomeRepository {
         value: createIncomeDTO.value,
         icomeDate: createIncomeDTO.icomeDate,
         description: createIncomeDTO.description,
-        categoryId: createIncomeDTO.categoryId, //na catgoria adicionar a subCategoria
+        categoryId: createIncomeDTO.categoryId,
         subCategoryId: createIncomeDTO.subCategoryId,
-        accountId: createIncomeDTO.accountId, //na conta adiciona o value do (icome) no (balance) da conta
+        accountId: createIncomeDTO.accountId,
         userId: createIncomeDTO.userId,
       },
     });

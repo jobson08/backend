@@ -45,9 +45,8 @@ model Income {
   title         String  @db.Citext
   value         Decimal  @db.Money
   types          String  @default("income")
-  description   String?
-  icomeDate     DateTime
-  
+  description   String
+  icomeDate     DateTime  @db.Date
 
   createdAt     DateTime    @default(now())
   updatedAt     DateTime    @updatedAt
@@ -74,7 +73,7 @@ model Expense{
   value         Decimal  @db.Money
   types          String  @default("expense")
   description   String?
-  expenseDate   DateTime
+  expenseDate   DateTime  @db.Date
   createdAt     DateTime    @default(now())
   updatedAt     DateTime    @updatedAt
 
