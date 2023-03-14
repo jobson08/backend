@@ -22,10 +22,13 @@ CREATE TABLE "income" (
     "id" BIGSERIAL NOT NULL,
     "title" CITEXT NOT NULL,
     "value" MONEY NOT NULL,
+    "types" TEXT NOT NULL DEFAULT 'income',
+    "description" TEXT,
     "icomeDate" TIMESTAMP(3) NOT NULL,
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updatedAt" TIMESTAMP(3) NOT NULL,
     "categoryId" BIGINT NOT NULL,
+    "subCategoryId" BIGINT NOT NULL,
     "accountId" BIGINT NOT NULL,
     "userId" BIGINT NOT NULL,
 
@@ -37,10 +40,13 @@ CREATE TABLE "expense" (
     "id" BIGSERIAL NOT NULL,
     "title" CITEXT NOT NULL,
     "value" MONEY NOT NULL,
+    "types" TEXT NOT NULL DEFAULT 'expense',
+    "description" TEXT,
     "expenseDate" TIMESTAMP(3) NOT NULL,
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updatedAt" TIMESTAMP(3) NOT NULL,
     "categoryId" BIGINT NOT NULL,
+    "subCategoryId" BIGINT NOT NULL,
     "accountId" BIGINT NOT NULL,
     "userId" BIGINT NOT NULL,
 
@@ -86,12 +92,6 @@ CREATE TABLE "account" (
 CREATE UNIQUE INDEX "user_email_key" ON "user"("email");
 
 -- CreateIndex
-CREATE UNIQUE INDEX "income_title_key" ON "income"("title");
-
--- CreateIndex
-CREATE UNIQUE INDEX "expense_title_key" ON "expense"("title");
-
--- CreateIndex
 CREATE UNIQUE INDEX "category_name_key" ON "category"("name");
 
 -- CreateIndex
@@ -104,6 +104,9 @@ CREATE UNIQUE INDEX "account_name_key" ON "account"("name");
 ALTER TABLE "income" ADD CONSTRAINT "income_categoryId_fkey" FOREIGN KEY ("categoryId") REFERENCES "category"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
+ALTER TABLE "income" ADD CONSTRAINT "income_subCategoryId_fkey" FOREIGN KEY ("subCategoryId") REFERENCES "subCategory"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+
+-- AddForeignKey
 ALTER TABLE "income" ADD CONSTRAINT "income_accountId_fkey" FOREIGN KEY ("accountId") REFERENCES "account"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
@@ -111,6 +114,9 @@ ALTER TABLE "income" ADD CONSTRAINT "income_userId_fkey" FOREIGN KEY ("userId") 
 
 -- AddForeignKey
 ALTER TABLE "expense" ADD CONSTRAINT "expense_categoryId_fkey" FOREIGN KEY ("categoryId") REFERENCES "category"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "expense" ADD CONSTRAINT "expense_subCategoryId_fkey" FOREIGN KEY ("subCategoryId") REFERENCES "subCategory"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
 ALTER TABLE "expense" ADD CONSTRAINT "expense_accountId_fkey" FOREIGN KEY ("accountId") REFERENCES "account"("id") ON DELETE RESTRICT ON UPDATE CASCADE;

@@ -42,16 +42,22 @@ model User {
 
 model Income {
   id           BigInt   @id @default(autoincrement())
-  title         String   @unique @db.Citext
+  title         String  @db.Citext
   value         Decimal  @db.Money
+  types          String  @default("income")
+  description   String?
   icomeDate     DateTime
-  description   String
+  
 
   createdAt     DateTime    @default(now())
   updatedAt     DateTime    @updatedAt
 
   category  Category @relation(fields: [categoryId], references: [id])
   categoryId BigInt 
+
+  subCategory  SubCategory @relation(fields: [subCategoryId], references: [id])
+  subCategoryId BigInt 
+
 
   account  Account @relation(fields: [accountId], references: [id])
   accountId BigInt 
@@ -64,16 +70,19 @@ model Income {
 
 model Expense{
   id            BigInt   @id @default(autoincrement())
-  title         String   @unique @db.Citext
+  title         String   @db.Citext
   value         Decimal  @db.Money
+  types          String  @default("expense")
+  description   String?
   expenseDate   DateTime
-  description   String
-
   createdAt     DateTime    @default(now())
   updatedAt     DateTime    @updatedAt
 
   category  Category @relation(fields: [categoryId], references: [id])
   categoryId BigInt 
+
+  subCategory  SubCategory @relation(fields: [subCategoryId], references: [id])
+  subCategoryId BigInt 
 
   account  Account @relation(fields: [accountId], references: [id])
   accountId BigInt 
@@ -104,6 +113,9 @@ model SubCategory {
   id            BigInt      @id @default(autoincrement())
   name          String     @unique @db.Citext
   createdAt     DateTime    @default(now())
+
+  income    Income[]
+  expense   Expense[]
 
   category  Category @relation(fields: [categoryId], references: [id])
   categoryId BigInt 

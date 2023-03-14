@@ -42,6 +42,7 @@ export class IncomeRepository {
         icomeDate: createIncomeDTO.icomeDate,
         description: createIncomeDTO.description,
         categoryId: createIncomeDTO.categoryId, //na catgoria adicionar a subCategoria
+        subCategoryId: createIncomeDTO.subCategoryId,
         accountId: createIncomeDTO.accountId, //na conta adiciona o value do (icome) no (balance) da conta
         userId: createIncomeDTO.userId,
       },
@@ -49,7 +50,7 @@ export class IncomeRepository {
   }
 
   async update(id: bigint, UpdateIncomeDTO: UpdateIncomeDto) {
-    return await this.prisma.movement.update({
+    return await this.prisma.income.update({
       select: { id: true },
       where: { id },
       data: UpdateIncomeDTO,
@@ -57,7 +58,7 @@ export class IncomeRepository {
   }
 
   async remove(id: bigint) {
-    return await this.prisma.movement.delete({
+    return await this.prisma.income.delete({
       select: { id: true },
       where: { id },
     });

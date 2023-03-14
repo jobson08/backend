@@ -44,8 +44,8 @@ export class IncomeService {
   async create(createIncomeDTO: CreateIncomeDto) {
     return await this.repository.create(createIncomeDTO);
   }
-  async update(id: bigint, UpdateMovementDTO: UpdateIncomeDto) {
-    return await this.repository.update(id, UpdateMovementDTO);
+  async update(id: bigint, UpdateIncometDTO: UpdateIncomeDto) {
+    return await this.repository.update(id, UpdateIncometDTO);
   }
 
   async remove(id: bigint) {
