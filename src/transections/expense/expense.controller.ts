@@ -32,10 +32,10 @@ export class ExpenseController {
     return await this.expenseService.findById(BigInt(id));
   }
 
-  /*@Post()
+  @Post()
   async create(@Body() createExpensetDTO: CreateExpenseDto) {
     return await this.expenseService.create(createExpensetDTO);
-  }*/
+  }
 
   @Patch(':id')
   async update(

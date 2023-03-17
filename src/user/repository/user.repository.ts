@@ -46,7 +46,13 @@ export class UserRepository {
   async update(id: bigint, UpdateUserDTO: UpdateUserDto) {
     return await this.prisma.user.update({
       where: { id },
-      data: UpdateUserDTO,
+      data: {
+        name: UpdateUserDTO.name,
+        email: UpdateUserDTO.email,
+        password: UpdateUserDTO.password,
+        avata: UpdateUserDTO.avata,
+        enabled: true,
+      },
     });
   }
 }

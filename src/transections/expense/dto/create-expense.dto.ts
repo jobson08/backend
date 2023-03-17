@@ -23,6 +23,11 @@ title: string;
     @Type(() => Number)
     categoryId: number;
 
+ 
+ @IsNumber({}, { message: 'A sub categoria  não pode ser vazio.' })
+    @Type(() => Number)
+    subCategoryId: number;     
+
 @IsNumber({}, { message: 'O usuario id não pode ser vazio.' })
     @Type(() => Number)
     accountId: number;

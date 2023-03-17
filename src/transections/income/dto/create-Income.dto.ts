@@ -35,23 +35,5 @@ description: string;
  @IsNumber({}, { message: 'O usuario id não pode ser vazio.' })
     @Type(() => Number)
     userId: number;
+  parsedDate: any;
 }
-
-/*
-id           BigInt   @id @default(autoincrement())
-  title         String   @unique @db.Citext
-  value         Decimal  @db.Money
-  icomeDate     DateTime
-
-  createdAt     DateTime    @default(now())
-  updatedAt     DateTime    @updatedAt
-
-  category  Category @relation(fields: [categoryId], references: [id])
-  categoryId BigInt  
-
-  account  Account @relation(fields: [accountId], references: [id])
-  accountId BigInt 
- 
-  user  User @relation(fields: [userId], references: [id])
-  userId BigInt 
-*/

@@ -42,9 +42,9 @@ export class expenseService {
     return await this.repository.findById(id);
   }
 
-  /*async create(createExpenseDTO: CreateExpenseDto) {
+  async create(createExpenseDTO: CreateExpenseDto) {
     return await this.repository.create(createExpenseDTO);
-  }*/
+  }
   async update(id: bigint, UpdateMovementDTO: UpdateExpenseDto) {
     return await this.repository.update(id, UpdateMovementDTO);
   }

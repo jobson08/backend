@@ -8,6 +8,8 @@ export class UpdateUserDto extends PartialType(CreateUserDto) {
   @Type(() => Number)
   readonly id: bigint;
 
+  avata: string;
+
   @IsNotEmpty({ message: 'ativo não pode ser vazio' })
   @IsBoolean({ message: 'ativo não pode ser vazio' })
   status: boolean;

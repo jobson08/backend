@@ -34,7 +34,7 @@ export class IncomeRepository {
   }
 
   async create(createIncomeDTO: CreateIncomeDto) {
-    //const parsedDate: Date = new Date(icomeDate);
+    //const parsedDate = new Date(icomeDate);
     return await this.prisma.income.create({
       select: { id: true },
       data: {
@@ -65,3 +65,18 @@ export class IncomeRepository {
     });
   }
 }
+
+/*
+Você deve formatar a data antes do envio pode usar esse código: 
+// cria uma nova data
+const data = new Date(Data recebida, ex: product.dateValidity);
+
+// obtém o ano, mês e dia da data
+const ano = data.getFullYear();
+const mes = String(data.getMonth() + 1).padStart(2, '0'); // adiciona zero à esquerda se o mês tiver apenas um dígito
+const dia = String(data.getDate()).padStart(2, '0'); // adiciona zero à esquerda se o dia tiver apenas um dígito
+
+// concatena os valores no formato "yyyy-mm-dd"
+const dataFormatada = `${ano}-${mes}-${dia}`;
+
+se você tem uma função handleSubmit, antes de enviar para service você faz a formatação da data, mesma coisa no prisma, antes do return faz a mesma formatação.*/

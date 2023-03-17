@@ -19,7 +19,7 @@ export class ExpenseRepository {
       take: Number(size),
       where: { title: { contains: search, mode: 'insensitive' } },
       orderBy: { [sort]: order },
-      // include: { category: { include: { subCategory: true } }, account: true },
+      include: { category: true, subCategory: true, account: true },
     });
     const totalItems = await this.prisma.expense.count({
       where: { title: { contains: search, mode: 'insensitive' } },
@@ -33,20 +33,21 @@ export class ExpenseRepository {
     });
   }
 
-  /*async create(createExpenseDTO: CreateExpenseDto) {
+  async create(createExpenseDTO: CreateExpenseDto) {
     return await this.prisma.expense.create({
       select: { id: true },
       data: {
         title: createExpenseDTO.title,
         value: createExpenseDTO.value,
-        icomeDate: createExpenseDTO.icomeDate,
-        desciption: createExpenseDTO.description,
+        expenseDate: createExpenseDTO.expenseDate,
+        description: createExpenseDTO.description,
         categoryId: createExpenseDTO.categoryId, //na catgoria adicionar a subCategoria
+        subCategoryId: createExpenseDTO.subCategoryId,
         accountId: createExpenseDTO.accountId, //na conta adiciona o value do (icome) no (balance) da conta
         userId: createExpenseDTO.userId,
       },
     });
-  }*/
+  }
 
   async update(id: bigint, UpdateExpenseDTO: UpdateExpenseDto) {
     return await this.prisma.movement.update({
