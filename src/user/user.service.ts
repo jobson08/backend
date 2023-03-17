@@ -2,6 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
 import { UserRepository } from './repository/user.repository';
+import * as bcrypt from 'bcrypt';
 
 @Injectable()
 export class UserService {
@@ -42,10 +43,12 @@ export class UserService {
   }
 
   async create(createUserDTO: CreateUserDto) {
+    createUserDTO.password = bcrypt.hashSync(createUserDTO.password, 10);
     return await this.repository.create(createUserDTO);
   }
 
-  async update(id: bigint, UpdateUserDTO: UpdateUserDto) {
-    return await this.repository.update(id, UpdateUserDTO);
+  async update(id: bigint, updateUserDTO: UpdateUserDto) {
+    updateUserDTO.password = bcrypt.hashSync(updateUserDTO.password, 10);
+    return await this.repository.update(id, updateUserDTO);
   }
 }
