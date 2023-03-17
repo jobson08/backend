@@ -7,6 +7,7 @@ import { ExpenseModule } from 'src/transections/expense/expense.module';
 import { AccountModule } from 'src/transections/accounts/account.module';
 import { SubCategoryModule } from 'src/transections/subCategory/subCategory.module';
 import { LoginModule } from 'src/login/login.module';
+import { AuthModule } from 'src/auth/auth,module';
 
 @Module({
   imports: [
@@ -17,6 +18,7 @@ import { LoginModule } from 'src/login/login.module';
     AccountModule,
     SubCategoryModule,
     LoginModule,
+    AuthModule,
   ],
   controllers: [],
   providers: [PrismaService],

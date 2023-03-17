@@ -8,7 +8,9 @@ import {
   Patch,
   Post,
   Request,
+  UseGuards,
 } from '@nestjs/common';
+import { JwtAuthGuard } from 'src/auth/jwt.auth.guard';
 import { CreateSubCategoryDto } from 'src/transections/subCategory/dto/create-subCategory.dto';
 import { UpdateSubCategoryDto } from 'src/transections/subCategory/dto/update-subCategorydto';
 import { SubCategoryService } from 'src/transections/subCategory/subCategoryservice';
@@ -17,6 +19,7 @@ import { SubCategoryService } from 'src/transections/subCategory/subCategoryserv
 export class SubCategoryController {
   constructor(private readonly subcategoryService: SubCategoryService) {}
   @Get('pages?')
+  @UseGuards(JwtAuthGuard)
   async pagination(@Request() request) {
     return await this.subcategoryService.paginate(
       request.query.hasOwnProperty('page') ? request.query.page : 0,

@@ -8,7 +8,9 @@ import {
   Patch,
   Post,
   Request,
+  UseGuards,
 } from '@nestjs/common';
+import { JwtAuthGuard } from 'src/auth/jwt.auth.guard';
 import { accountService } from 'src/transections/accounts/account.service';
 import { CreateAccountDto } from 'src/transections/accounts/dto/create-account.dto';
 import { UpdateAccountDto } from 'src/transections/accounts/dto/update-account.dto';
@@ -17,6 +19,7 @@ import { UpdateAccountDto } from 'src/transections/accounts/dto/update-account.d
 export class AccountController {
   constructor(private readonly accountService: accountService) {}
   @Get('pages?')
+  @UseGuards(JwtAuthGuard)
   async pagination(@Request() request) {
     return await this.accountService.paginate(
       request.query.hasOwnProperty('page') ? request.query.page : 0,

@@ -7,15 +7,18 @@ import {
   Patch,
   Post,
   Request,
+  UseGuards,
 } from '@nestjs/common';
 import { CreateCategoryDto } from './dto/create-category.dto';
 import { UpdateCategoryDto } from './dto/update-category.dto';
 import { CategoryService } from './category.service';
+import { JwtAuthGuard } from 'src/auth/jwt.auth.guard';
 
 @Controller('category')
 export class CategoryController {
   constructor(private readonly categoryService: CategoryService) {}
   @Get('pages?')
+  @UseGuards(JwtAuthGuard)
   async pagination(@Request() request) {
     return await this.categoryService.paginate(
       request.query.hasOwnProperty('page') ? request.query.page : 0,
