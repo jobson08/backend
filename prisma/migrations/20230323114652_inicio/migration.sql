@@ -23,8 +23,8 @@ CREATE TABLE "income" (
     "title" CITEXT NOT NULL,
     "value" MONEY NOT NULL,
     "types" TEXT NOT NULL DEFAULT 'income',
-    "description" TEXT,
-    "icomeDate" TIMESTAMP(3) NOT NULL,
+    "description" TEXT NOT NULL,
+    "icomeDate" DATE NOT NULL,
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updatedAt" TIMESTAMP(3) NOT NULL,
     "categoryId" BIGINT NOT NULL,
@@ -42,7 +42,7 @@ CREATE TABLE "expense" (
     "value" MONEY NOT NULL,
     "types" TEXT NOT NULL DEFAULT 'expense',
     "description" TEXT,
-    "expenseDate" TIMESTAMP(3) NOT NULL,
+    "expenseDate" DATE NOT NULL,
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updatedAt" TIMESTAMP(3) NOT NULL,
     "categoryId" BIGINT NOT NULL,
@@ -59,6 +59,7 @@ CREATE TABLE "category" (
     "name" CITEXT NOT NULL,
     "icon" INTEGER,
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "typeExpense" BOOLEAN NOT NULL,
     "userId" BIGINT NOT NULL,
 
     CONSTRAINT "category_pkey" PRIMARY KEY ("id")

@@ -97,7 +97,7 @@ model Category {
   name          String     @unique @db.Citext
   icon          Int?
   createdAt     DateTime    @default(now())
-  
+  typeExpense   Boolean
   subCategory   SubCategory[]
   income    Income[]
   expense   Expense[]

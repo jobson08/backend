@@ -9,4 +9,6 @@ export class CreateCategoryDto {
   @IsNumber({}, { message: 'O usuario id não pode ser vazio.' })
   @Type(() => Number)
   userId: number;
+
+  typeExpense: boolean;
 }

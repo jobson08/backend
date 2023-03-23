@@ -38,6 +38,7 @@ export class CategoryRepository {
       data: {
         name: createCategoryDTO.name,
         userId: createCategoryDTO.userId,
+        typeExpense: createCategoryDTO.typeExpense,
       },
     });
   }

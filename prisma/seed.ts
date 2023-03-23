@@ -22,31 +22,47 @@ async function main() {
   });
   //category
   await prisma.category.create({
-    data: { name: 'fabrica de bolos', icon: 1, userId: 1 },
+    data: { name: 'fabrica de bolos', icon: 1, typeExpense: false, userId: 1 },
   });
   await prisma.category.create({
-    data: { name: 'Padaria', icon: 2, userId: 1 },
+    data: {
+      name: 'Despesa fabrica de bolos',
+      icon: 2,
+      typeExpense: true,
+      userId: 1,
+    },
   });
   await prisma.category.create({
-    data: { name: 'Casa', icon: 3, userId: 1 },
+    data: { name: 'Padaria', icon: 3, typeExpense: false, userId: 1 },
   });
   await prisma.category.create({
-    data: { name: 'Gasto Pessoal', icon: 4, userId: 1 },
+    data: { name: 'Despesa Padaria', icon: 4, typeExpense: true, userId: 1 },
   });
   await prisma.category.create({
-    data: { name: 'Gasto Esporádicos', icon: 5, userId: 1 },
+    data: { name: 'Despesa Casa', icon: 5, typeExpense: true, userId: 1 },
   });
   await prisma.category.create({
-    data: { name: 'Imposto', icon: 6, userId: 1 },
+    data: { name: 'Gasto Pessoal', icon: 6, typeExpense: true, userId: 1 },
   });
   await prisma.category.create({
-    data: { name: 'Saude', icon: 7, userId: 1 },
+    data: { name: 'Gasto Esporádicos', icon: 7, typeExpense: true, userId: 1 },
   });
   await prisma.category.create({
-    data: { name: 'Transporte', icon: 8, userId: 1 },
+    data: { name: 'Imposto', icon: 8, typeExpense: true, userId: 1 },
   });
   await prisma.category.create({
-    data: { name: 'Serviços Financeiros', icon: 9, userId: 1 },
+    data: { name: 'Saude', icon: 9, typeExpense: true, userId: 1 },
+  });
+  await prisma.category.create({
+    data: { name: 'Transporte', icon: 10, typeExpense: true, userId: 1 },
+  });
+  await prisma.category.create({
+    data: {
+      name: 'Serviços Financeiros',
+      icon: 11,
+      typeExpense: true,
+      userId: 1,
+    },
   });
 
   //SubCategory
