@@ -43,7 +43,7 @@ export class ExpenseRepository {
         description: createExpenseDTO.description,
         categoryId: createExpenseDTO.categoryId, //na catgoria adicionar a subCategoria
         subCategoryId: createExpenseDTO.subCategoryId,
-        accountId: createExpenseDTO.accountId, //na conta adiciona o value do (icome) no (balance) da conta
+        accountId: createExpenseDTO.accountId, //conta verifiva se existe a conta (ID) remover value e atualiza  o value do (icome) no (balance) da conta
         userId: createExpenseDTO.userId,
       },
     });

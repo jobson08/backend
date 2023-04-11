@@ -36,4 +36,6 @@ description: string;
     @Type(() => Number)
     userId: number;
   parsedDate: any;
+
+  balance: number;
 }

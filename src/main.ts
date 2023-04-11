@@ -11,9 +11,9 @@ async function bootstrap() {
   app.useGlobalInterceptors(new ErrorsInterceptor());
   app.enableCors({
     origin: true,
-    methods: 'GET,HEAD,PUT,PATCH,POS,DELETE,OPTIONS',
+    methods: 'GET,HEAD,PUT,PATCH,POST,DELETE,OPTIONS',
     credentials: true,
   });
-  await app.listen(3001);
+  await app.listen(3002);
 }
 bootstrap();

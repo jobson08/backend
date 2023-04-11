@@ -46,6 +46,7 @@ export class IncomeRepository {
         subCategoryId: createIncomeDTO.subCategoryId,
         accountId: createIncomeDTO.accountId,
         userId: createIncomeDTO.userId,
+        //account: { connect: createIncomeDTO.accountId }, inserir valor na tabela conta (balance);
       },
     });
   }
